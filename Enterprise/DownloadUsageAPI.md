@@ -69,5 +69,5 @@ That's it.
 
 In my test, I was able to download 1 GB of file in around 8 minutes. 
 
-feel free to try other variants of reading and writing to file for better performance.
+Please feel free to try other variants of reading and writing to file for better performance.
 
