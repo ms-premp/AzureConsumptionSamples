@@ -23,7 +23,7 @@ I am writing a simple C# function to get the job done.
 /// <param name="apiKey">API key for making the request</param>
 /// <param name="billingPeriod">billing period for usage data</param>
 /// <param name="destinationFilePath">path to file, where the data will be downloaded</param>
-public void DonwloadUsage(string enrollmentNumber, string apiKey, string billingPeriod, string destinationFilePath)
+public void DownloadUsage(string enrollmentNumber, string apiKey, string billingPeriod, string destinationFilePath)
 {
 	try
 	{
