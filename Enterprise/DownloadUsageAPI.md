@@ -25,47 +25,46 @@ I am writing a simple C# function to get the job done.
 /// <param name="destinationFilePath">path to file, where the data will be downloaded</param>
 public void DownloadUsage(string enrollmentNumber, string apiKey, string billingPeriod, string destinationFilePath)
 {
-		try
+	try
+	{
+		var apiUrl = $"https://consumption.azure.com/v3/enrollments/{enrollmentNumber}/usagedetails/download?billingPeriod={billingPeriod}";
+		var request = System.Net.WebRequest.CreateHttp(apiUrl);
+		request.Headers.Add("authorization", "bearer " + apiKey);
+		request.Method = "GET";
+		Console.WriteLine("Making Request to " + apiUrl);
+		using (var response = (System.Net.HttpWebResponse)request.GetResponse())
 		{
-				var apiUrl = $"https://consumption.azure.com/v3/enrollments/{enrollmentNumber}/usagedetails/download?billingPeriod={billingPeriod}";
-				var request = System.Net.WebRequest.CreateHttp(apiUrl);
-				request.Headers.Add("authorization", "bearer " + apiKey);
-				request.Method = "GET";
-				Console.WriteLine("Making Request to " + apiUrl);
-				using (var response = (System.Net.HttpWebResponse)request.GetResponse())
-				{
-						var responseStream = response.GetResponseStream();
-						if (responseStream == null)
-						{
-								Console.WriteLine("No Response");
-						}
-						else
-						{
-								Console.WriteLine("Response received. Downloading");
-								//// feel free to change buffer size as needed.
-								const int BufferSize = 64 * 1024 * 1024;
-								var totalSize = 0;
-								using (var reader = new System.IO.StreamReader(responseStream, System.Text.Encoding.UTF8))
-								using (var writer = new System.IO.StreamWriter(destinationFilePath))
-								{
-										var buffer = new char[BufferSize];
-										int bytesRead;
-										while ((bytesRead = reader.Read(buffer, 0, BufferSize)) != 0)
-										{
-												writer.Write(buffer);
-												totalSize += bytesRead;
-												Console.WriteLine(totalSize + " downloaded.");
-										}					
-								}
-						}
-				}
+			var responseStream = response.GetResponseStream();
+			if (responseStream == null)
+			{
+				Console.WriteLine("No Response");
+			}
+			else
+			{
 				Console.WriteLine("Response received. Downloading");
+				//// feel free to change buffer size as needed.
+				const int BufferSize = 64 * 1024 * 1024;
+				var totalSize = 0;
+				using (var reader = new System.IO.StreamReader(responseStream, System.Text.Encoding.UTF8))
+				using (var writer = new System.IO.StreamWriter(destinationFilePath))
+				{
+					var buffer = new char[BufferSize];
+					int bytesRead;
+					while ((bytesRead = reader.Read(buffer, 0, BufferSize)) != 0)
+					{
+						writer.Write(buffer);
+						totalSize += bytesRead;
+						Console.WriteLine(totalSize + " downloaded.");
+					}					
+				}
+			}
 		}
-		catch (Exception ex)
-		{
-				Console.WriteLine(ex);
-		}
-
+		Console.WriteLine("Response received. Downloading");
+	}
+	catch (Exception ex)
+	{
+		Console.WriteLine(ex);
+	}
 }
 ```
 
@@ -85,47 +84,46 @@ Here is a simple C# function to get the job done.
 /// <param name="destinationFilePath">path to file, where the data will be downloaded</param>
 public void GetUsageByDate(string enrollmentNumber, string apiKey, string startDate, string endDate, string destinationFilePath)
 {
-		try
+	try
+	{
+		var apiUrl = $"https://consumption.azure.com/v3/enrollments/{enrollmentNumber}/usagedetailsbycustomdate?startTime={startDate}&endTime={endDate}";
+		var request = System.Net.WebRequest.CreateHttp(apiUrl);
+		request.Headers.Add("authorization", "bearer " + apiKey);
+		request.Method = "GET";
+		Console.WriteLine("Making Request to " + apiUrl);
+		using (var response = (System.Net.HttpWebResponse)request.GetResponse())
 		{
-				var apiUrl = $"https://consumption.azure.com/v3/enrollments/{enrollmentNumber}/usagedetailsbycustomdate?startTime={startDate}&endTime={endDate}";
-				var request = System.Net.WebRequest.CreateHttp(apiUrl);
-				request.Headers.Add("authorization", "bearer " + apiKey);
-				request.Method = "GET";
-				Console.WriteLine("Making Request to " + apiUrl);
-				using (var response = (System.Net.HttpWebResponse)request.GetResponse())
+			var responseStream = response.GetResponseStream();
+			if (responseStream == null)
+			{
+				Console.WriteLine("No Response");
+			}
+			else
+			{
+				Console.WriteLine("Response received. Downloading");
+				//// feel free to change buffer size as needed.
+				const int BufferSize = 64 * 1024 * 1024;
+				var totalSize = 0;
+				using (var reader = new System.IO.StreamReader(responseStream, System.Text.Encoding.UTF8))
+				using (var writer = new System.IO.StreamWriter(destinationFilePath))
 				{
-						var responseStream = response.GetResponseStream();
-						if (responseStream == null)
-						{
-								Console.WriteLine("No Response");
-						}
-						else
-						{
-								Console.WriteLine("Response received. Downloading");
-								//// feel free to change buffer size as needed.
-								const int BufferSize = 64 * 1024 * 1024;
-								var totalSize = 0;
-								using (var reader = new System.IO.StreamReader(responseStream, System.Text.Encoding.UTF8))
-								using (var writer = new System.IO.StreamWriter(destinationFilePath))
-								{
-										var buffer = new char[BufferSize];
-										int bytesRead;
-										while ((bytesRead = reader.Read(buffer, 0, BufferSize)) != 0)
-										{
-												writer.Write(buffer);
-												totalSize += bytesRead;
-												Console.WriteLine(totalSize + " downloaded.");
-										}					
-								}
-						}
+					var buffer = new char[BufferSize];
+					int bytesRead;
+					while ((bytesRead = reader.Read(buffer, 0, BufferSize)) != 0)
+					{
+						writer.Write(buffer);
+						totalSize += bytesRead;
+						Console.WriteLine(totalSize + " downloaded.");
+					}					
 				}
-				Console.WriteLine("Finished");
+			}
 		}
-		catch (Exception ex)
-		{
-				Console.WriteLine(ex);
-		}
-
+		Console.WriteLine("Finished");
+	}
+	catch (Exception ex)
+	{
+		Console.WriteLine(ex);
+	}
 }
 ```
 
