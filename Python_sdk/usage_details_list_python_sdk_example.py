@@ -11,7 +11,7 @@ class MyUsage:
         self.consumption_client = get_client_from_json_dict(ConsumptionManagementClient, credData)
 
     def run(self, date_filter):
-        usages = self.consumption_client.usage_details.list(self.scope, filter=date_filter);   
+        usages = self.consumption_client.usage_details.list(self.scope, filter=date_filter)   
         output = list(usages)             
         minDate = min(output, key=lambda x: x.date_property).date_property
         maxDate = max(output, key=lambda x: x.date_property).date_property
