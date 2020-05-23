@@ -27,7 +27,7 @@ class MyUsage:
 
 
 def run_example_by_datefilter():
-    azure_usage = MyUsage("credentials.json")
+    azure_usage = MyUsage("C:\Work\SDK\Python\credentials.json")
     date_filter = "properties/usageStart ge '2020-02-26' AND properties/usageStart lt '2020-02-27'"     
     print("Get data by date range '2020-02-26' and '2020-02-27'")
     azure_usage.run_by_date(date_filter)    
@@ -35,7 +35,7 @@ def run_example_by_datefilter():
 
 
 def run_example_by_billingperiod():
-    azure_usage = MyUsage("credentials.json")    
+    azure_usage = MyUsage("C:\Work\SDK\Python\credentials.json")    
     print("Get data by billing period 202003")
     azure_usage.run_by_billing_period("202003")
     print("Done")
