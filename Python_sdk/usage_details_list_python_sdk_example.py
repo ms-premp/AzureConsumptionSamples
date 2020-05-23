@@ -16,7 +16,7 @@ class MyUsage:
 
     def run_by_billing_period(self, billing_period):
         scope = self.scope + "/providers/Microsoft.Billing/billingPeriods/" + billing_period
-        usages = self.consumption_client.usage_details.list(self.scope);       
+        usages = self.consumption_client.usage_details.list(scope);       
         self.printresults(usages)
 
     def printresults(self, usages):
