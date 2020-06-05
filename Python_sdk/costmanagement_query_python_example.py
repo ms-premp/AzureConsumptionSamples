@@ -55,11 +55,12 @@ class MyUsage:
         self.usagedata = []
         response = requests.post(self.costmanagementUrl, data=payloadjson, headers = self.headers)
         if response.status_code == 200:
-            self.transform(payloadjson, response.text)
-            print(*self.usagedata, sep = "\n")
+            self.transform(payloadjson, response.text)            
         else:
             print("error")   
             print("error " + response.text)
+
+        return self.usagedata
 
 
     def transform(self, payloadjson, response):
@@ -89,8 +90,9 @@ class MyUsage:
 
 def run_example():
     azure_usage = MyUsage("credentials.json")
-    azure_usage.run("2020-04-01", "2020-06-30")
-    # azure_usage.run("2020-04-01", "2020-06-30", groupby="ServiceName")
+    usageResult = azure_usage.run("2020-04-01", "2020-06-30")
+    # usageResult = azure_usage.run("2020-04-01", "2020-06-30", groupby="ServiceName")
+    print(*usageResult, sep = "\n")
     print("Done")
 
 
